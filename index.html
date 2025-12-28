@@ -8,109 +8,119 @@
 <style>
 body{
   margin:0;
-  background:#0f1220;
-  font-family:Arial;
+  background:#0d1020;
+  font-family:Arial, sans-serif;
   color:white;
 }
 
-/* HEADER */
+/* ---------- HEADER ---------- */
 header{
-  background:#12152a;
-  padding:15px 25px;
+  background:#13172d;
+  padding:14px 22px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.5);
 }
 
-.logo{
-  font-weight:bold;
-  font-size:22px;
-  letter-spacing:1px;
+header h1{
+  margin:0;
+  font-size:20px;
+  font-weight:700;
 }
 
 .profile{
-  background:#22284d;
+  background:#1f2550;
   padding:10px 14px;
   border-radius:50px;
 }
 
-/* LAYOUT */
+/* ---------- LAYOUT ---------- */
 .container{
   display:flex;
+  gap:20px;
   padding:20px;
 }
 
-/* SIDEBAR */
+/* ---------- SIDEBAR ---------- */
 .sidebar{
   width:260px;
-  background:#12162e;
+  background:#131938;
   border-radius:18px;
-  padding:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.4);
+  padding:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
 
-.sidebar h3{
-  opacity:.8;
-}
-
-.mail-item{
+.compose{
+  width:100%;
   padding:12px;
+  background:#3f6bff;
+  border-radius:14px;
+  border:none;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  margin-bottom:14px;
+}
+
+.mail{
+  background:#1a2150;
+  padding:12px;
+  border-radius:14px;
   margin-top:10px;
-  border-radius:12px;
-  background:#1b2142;
   cursor:pointer;
   transition:.2s;
 }
 
-.mail-item:hover{
-  background:#243063;
+.mail:hover{
+  background:#25317a;
 }
 
-/* MAIN CARD */
+/* ---------- MAIN PANEL ---------- */
 .main{
   flex:1;
-  margin-left:20px;
-  background:#12162e;
+  background:#131938;
   border-radius:18px;
-  padding:22px;
-  box-shadow:0 10px 25px rgba(0,0,0,.4);
+  padding:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
 
-/* FORM */
 input,textarea{
   width:100%;
-  margin-top:8px;
-  padding:10px 12px;
-  border-radius:10px;
+  background:#0c1028;
   border:none;
-  outline:none;
-  background:#0c1024;
+  padding:10px;
   color:white;
+  border-radius:12px;
+  margin-top:6px;
 }
 
-button{
+button.send{
   margin-top:12px;
   width:100%;
   padding:12px;
-  background:#3e67ff;
-  color:white;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
+  background:#3f6bff;
+  color:white;
   font-size:16px;
-  cursor:pointer;
-  transition:.2s;
 }
 
-button:hover{
-  transform:scale(1.02);
-}
-
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 footer{
   text-align:center;
-  margin-top:30px;
+  margin-top:20px;
   opacity:.6;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:850px){
+  .container{
+    flex-direction:column;
+  }
+  .sidebar{
+    width:100%;
+  }
 }
 </style>
 </head>
@@ -118,31 +128,30 @@ footer{
 <body>
 
 <header>
-  <div class="logo">📧 Mon WebMail</div>
+  <h1>📧 Mon WebMail</h1>
   <div class="profile">👤 Mon compte</div>
 </header>
 
 <div class="container">
 
   <div class="sidebar">
-    <h3>Boîte de réception</h3>
+    <button class="compose">➕ Nouveau message</button>
 
-    <div class="mail-item">Bienvenue sur ton WebMail 🎉</div>
-    <div class="mail-item">Message système</div>
-    <div class="mail-item">Nouveau mail (exemple)</div>
+    <div class="mail">Bienvenue 🎉</div>
+    <div class="mail">Notification système</div>
+    <div class="mail">Test message</div>
   </div>
 
   <div class="main">
     <h2>✉️ Nouveau message</h2>
-    <p>Envoie-moi un message via ce formulaire :</p>
 
     <label>Email</label>
-    <input placeholder="exemple@mail.com">
+    <input placeholder="tonmail@email.com">
 
     <label>Message</label>
-    <textarea rows="6" placeholder="Ton message ici..."></textarea>
+    <textarea rows="6"></textarea>
 
-    <button>Envoyer</button>
+    <button class="send">Envoyer</button>
   </div>
 
 </div>
