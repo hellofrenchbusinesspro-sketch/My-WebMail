@@ -1,102 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon WebMail</title>
+  <meta charset="UTF-8">
+  <title>My WebMail — Connexion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body{
-  background:#0f1220;
-  color:white;
-  font-family:Arial;
-  margin:0;
-}
+  <style>
+    body{
+      background:#0f1117;
+      color:white;
+      font-family:Arial;
+      margin:0;
+      padding:0;
+      text-align:center;
+    }
+    .box{
+      max-width:380px;
+      margin:40px auto;
+      background:#131827;
+      padding:20px;
+      border-radius:12px;
+    }
+    input{
+      width:90%;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+      margin-top:10px;
+    }
+    button{
+      width:95%;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+      margin-top:15px;
+      background:#2a4fff;
+      color:white;
+      font-size:16px;
+    }
+  </style>
 
-nav{
-  background:#131833;
-  padding:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.menu{
-  font-weight:bold;
-}
-
-button{
-  background:#1f2a52;
-  color:white;
-  border:none;
-  border-radius:10px;
-  padding:8px 14px;
-}
-.container{
-  display:flex;
-  padding:20px;
-  gap:20px;
-}
-.sidebar{
-  width:200px;
-  background:#131833;
-  padding:10px;
-  border-radius:12px;
-}
-.sidebar div{
-  background:#273270;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:10px;
-}
-.content{
-  flex:1;
-  background:#131833;
-  border-radius:12px;
-  padding:15px;
-}
-footer{
-  text-align:center;
-  padding:20px;
-  color:#888;
-}
-</style>
 </head>
-
 <body>
 
-<nav>
-  <div class="menu">📧 Mon WebMail</div>
-  <button id="accountBtn">Mon compte</button>
-</nav>
+  <h2>My WebMail — Connexion</h2>
 
-<div class="container">
-  <div class="sidebar">
-    <div>Bienvenue 🎉</div>
-    <div>Message système</div>
-    <div>Exemple</div>
+  <div class="box">
+    <h3>Créer un compte</h3>
+    <input id="regEmail" type="email" placeholder="Email">
+    <input id="regPass" type="password" placeholder="Mot de passe">
+    <button onclick="register()">Créer</button>
   </div>
 
-  <div class="content">
-    <h2>Bienvenue 🎉</h2>
-    <p>Bienvenue sur ton WebMail !</p>
+  <div class="box">
+    <h3>Se connecter</h3>
+    <input id="logEmail" type="email" placeholder="Email">
+    <input id="logPass" type="password" placeholder="Mot de passe">
+    <button onclick="login()">Connexion</button>
   </div>
-</div>
-
-<footer>
-© 2025 — Mon WebMail
-</footer>
 
 
-<!-- 🔥🔥🔥 FIREBASE — NE RIEN TOUCHER 🔥🔥🔥 -->
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth,
-         createUserWithEmailAndPassword,
-         signInWithEmailAndPassword,
-         signOut,
-         onAuthStateChanged }
-from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { 
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAf0rz9mpUG2GpxyBeIyBvuHLHu-mANlSt",
@@ -104,46 +75,36 @@ const firebaseConfig = {
   projectId: "movnembaii",
   storageBucket: "movnembaii.firebasestorage.app",
   messagingSenderId: "753446508336",
-  appId: "1:753446508336:web:638f226312374d79e32fed",
-  measurementId: "G-CPYXKPRQGW"
+  appId: "1:753446508336:web:638f226312374d79e32fed"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const btn = document.getElementById("accountBtn");
+window.register = async function(){
+  const email = document.getElementById("regEmail").value;
+  const pass = document.getElementById("regPass").value;
 
-function login(){
-  const email = prompt("Email :");
-  const pass = prompt("Mot de passe :");
-  signInWithEmailAndPassword(auth,email,pass)
-  .catch(e=>alert(e.message));
-}
-
-function register(){
-  const email = prompt("Créer email :");
-  const pass = prompt("Créer mot de passe :");
-  createUserWithEmailAndPassword(auth,email,pass)
-  .then(()=>alert("Compte créé 🎉"))
-  .catch(e=>alert(e.message));
-}
-
-function logout(){
-  signOut(auth);
-}
-
-btn.onclick = ()=>{
-  if(auth.currentUser){
-    if(confirm("Déconnexion ?")) logout();
-  }else{
-    if(confirm("OK = Connexion\nAnnuler = Inscription")) login();
-    else register();
+  try{
+    await createUserWithEmailAndPassword(auth,email,pass);
+    alert("Compte créé !");
+  }catch(err){
+    alert(err.message);
   }
-};
+}
 
-onAuthStateChanged(auth,user=>{
-  btn.innerText = user ? user.email : "Mon compte";
-});
+window.login = async function(){
+  const email = document.getElementById("logEmail").value;
+  const pass = document.getElementById("logPass").value;
+
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+    alert("Connecté !");
+  }catch(err){
+    alert(err.message);
+  }
+}
+
 </script>
 
 </body>
