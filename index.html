@@ -2,111 +2,115 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mon WebMail</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:white;
+  margin:0;
+  background:#0f1220;
+  font-family:Arial;
+  color:white;
 }
 
-/* Header */
+/* HEADER */
 header{
-    background:#020617;
-    padding:25px;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    letter-spacing:1px;
-    border-bottom:1px solid #1f2937;
+  background:#12152a;
+  padding:15px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
 }
 
-/* Main layout */
+.logo{
+  font-weight:bold;
+  font-size:22px;
+  letter-spacing:1px;
+}
+
+.profile{
+  background:#22284d;
+  padding:10px 14px;
+  border-radius:50px;
+}
+
+/* LAYOUT */
 .container{
-    max-width:1000px;
-    margin:30px auto;
-    padding:15px;
+  display:flex;
+  padding:20px;
 }
 
-/* Card */
-.card{
-    background:#020617;
-    border-radius:18px;
-    border:1px solid #1f2937;
-    box-shadow:0 0 25px rgba(0,0,0,.6);
-    padding:25px;
+/* SIDEBAR */
+.sidebar{
+  width:260px;
+  background:#12162e;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
-/* Section title */
-.card h2{
-    margin-top:0;
-    font-size:24px;
-}
-
-/* Inputs */
-input, textarea{
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-    border-radius:10px;
-    border:1px solid #374151;
-    background:#020617;
-    color:white;
-    font-size:15px;
-}
-
-/* Button */
-button{
-    margin-top:18px;
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#1d4ed8;
-    cursor:pointer;
-}
-
-/* Footer */
-footer{
-    margin-top:50px;
-    text-align:center;
-    color:#9ca3af;
-}
-
-.mailbox{
-    display:flex;
-    gap:20px;
-    margin-top:20px;
-}
-
-/* Fake inbox */
-.inbox{
-    flex:1;
-    background:#020617;
-    border:1px solid #1f2937;
-    border-radius:16px;
-    padding:15px;
-}
-
-.inbox h3{
-    margin-top:0;
+.sidebar h3{
+  opacity:.8;
 }
 
 .mail-item{
-    padding:12px;
-    border-radius:12px;
-    margin-top:10px;
-    border:1px solid #374151;
+  padding:12px;
+  margin-top:10px;
+  border-radius:12px;
+  background:#1b2142;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.mail-item:hover{
+  background:#243063;
+}
+
+/* MAIN CARD */
+.main{
+  flex:1;
+  margin-left:20px;
+  background:#12162e;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+/* FORM */
+input,textarea{
+  width:100%;
+  margin-top:8px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  background:#0c1024;
+  color:white;
+}
+
+button{
+  margin-top:12px;
+  width:100%;
+  padding:12px;
+  background:#3e67ff;
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:scale(1.02);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:30px;
+  opacity:.6;
 }
 </style>
 </head>
@@ -114,41 +118,37 @@ footer{
 <body>
 
 <header>
-  📧 Mon WebMail
+  <div class="logo">📧 Mon WebMail</div>
+  <div class="profile">👤 Mon compte</div>
 </header>
 
 <div class="container">
 
-    <div class="mailbox">
+  <div class="sidebar">
+    <h3>Boîte de réception</h3>
 
-        <div class="inbox">
-            <h3>📥 Boîte de réception</h3>
+    <div class="mail-item">Bienvenue sur ton WebMail 🎉</div>
+    <div class="mail-item">Message système</div>
+    <div class="mail-item">Nouveau mail (exemple)</div>
+  </div>
 
-            <div class="mail-item">Aucun message (pour l’instant 🙂)</div>
-        </div>
+  <div class="main">
+    <h2>✉️ Nouveau message</h2>
+    <p>Envoie-moi un message via ce formulaire :</p>
 
-        <div class="card">
-            <h2>✉️ Nouveau message</h2>
-            <p>Envoie-moi un message via ce formulaire :</p>
+    <label>Email</label>
+    <input placeholder="exemple@mail.com">
 
-            <form action="https://formspree.io/f/mldgdngr" method="POST">
+    <label>Message</label>
+    <textarea rows="6" placeholder="Ton message ici..."></textarea>
 
-                <label>Email</label>
-                <input type="email" name="email" required>
+    <button>Envoyer</button>
+  </div>
 
-                <label>Message</label>
-                <textarea name="message" rows="6" required></textarea>
-
-                <button type="submit">Envoyer</button>
-
-            </form>
-        </div>
-
-    </div>
 </div>
 
 <footer>
-© 2025 — Mon WebMail
+  © 2025 — Mon WebMail
 </footer>
 
 </body>
