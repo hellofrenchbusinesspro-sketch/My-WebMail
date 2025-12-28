@@ -1,150 +1,150 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon WebMail</title>
+  <meta charset="UTF-8">
+  <title>My WebMail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body{
-  margin:0;
-  background:#0d1020;
-  font-family:Arial, sans-serif;
-  color:white;
-}
+  <style>
+    body{
+      background:#0f172a;
+      color:white;
+      font-family:Arial;
+      margin:0;
+    }
 
-/* ---------- HEADER ---------- */
-header{
-  background:#13172d;
-  padding:14px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 8px 25px rgba(0,0,0,.5);
-}
+    header{
+      padding:20px;
+      background:#111827;
+      text-align:center;
+      font-size:22px;
+      font-weight:bold;
+    }
 
-header h1{
-  margin:0;
-  font-size:20px;
-  font-weight:700;
-}
+    .box{
+      max-width:400px;
+      margin:40px auto;
+      background:#020617;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 0 20px rgba(255,255,255,.05);
+    }
 
-.profile{
-  background:#1f2550;
-  padding:10px 14px;
-  border-radius:50px;
-}
+    input{
+      width:100%;
+      padding:10px;
+      margin:10px 0;
+      border-radius:5px;
+      border:none;
+    }
 
-/* ---------- LAYOUT ---------- */
-.container{
-  display:flex;
-  gap:20px;
-  padding:20px;
-}
+    button{
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border:none;
+      border-radius:5px;
+      background:#3b82f6;
+      color:white;
+      font-size:16px;
+    }
 
-/* ---------- SIDEBAR ---------- */
-.sidebar{
-  width:260px;
-  background:#131938;
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 8px 30px rgba(0,0,0,.45);
-}
-
-.mail{
-  background:#1a2150;
-  padding:12px;
-  border-radius:14px;
-  margin-top:10px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.mail.unread{
-  border-left:4px solid #3f6bff;
-}
-
-.mail:hover{
-  background:#25317a;
-}
-
-/* ---------- MAIN PANEL ---------- */
-.main{
-  flex:1;
-  background:#131938;
-  border-radius:18px;
-  padding:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.45);
-}
-
-.messageBox{
-  background:#0c1028;
-  padding:14px;
-  border-radius:14px;
-  min-height:140px;
-}
-
-/* ---------- FOOTER ---------- */
-footer{
-  text-align:center;
-  margin-top:20px;
-  opacity:.6;
-}
-
-/* ---------- MOBILE ---------- */
-@media(max-width:850px){
-  .container{
-    flex-direction:column;
-  }
-  .sidebar{
-    width:100%;
-  }
-}
-</style>
+    .hidden{ display:none; }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <h1>📧 Mon WebMail</h1>
-  <div class="profile">👤 Mon compte</div>
+  My WebMail — Connexion
 </header>
 
-<div class="container">
+<div class="box" id="authBox">
 
-  <div class="sidebar">
-    <div class="mail unread" onclick="openMail('Bienvenue 🎉','Bienvenue sur ton WebMail !')">
-      Bienvenue 🎉
-    </div>
+  <h3>Créer un compte</h3>
+  <input id="signupEmail" placeholder="Email">
+  <input id="signupPass" type="password" placeholder="Mot de passe">
+  <button id="signupBtn">S'inscrire</button>
 
-    <div class="mail unread" onclick="openMail('Message système','Ceci est un message système')">
-      Message système
-    </div>
+  <hr>
 
-    <div class="mail" onclick="openMail('Exemple','Ceci est un exemple de mail 👍')">
-      Exemple
-    </div>
-  </div>
-
-  <div class="main">
-    <h2 id="title">📭 Aucun message ouvert</h2>
-
-    <div class="messageBox" id="content">
-      Sélectionne un mail à gauche pour l’ouvrir ici.
-    </div>
-  </div>
+  <h3>Connexion</h3>
+  <input id="loginEmail" placeholder="Email">
+  <input id="loginPass" type="password" placeholder="Mot de passe">
+  <button id="loginBtn">Se connecter</button>
 
 </div>
 
-<footer>
-  © 2025 — Mon WebMail
-</footer>
 
-<script>
-function openMail(title,text){
-  document.getElementById("title").innerText = title;
-  document.getElementById("content").innerText = text;
-}
+<div class="box hidden" id="userBox">
+  <h3 id="userEmail"></h3>
+  <button id="logoutBtn">Se déconnecter</button>
+</div>
+
+
+<!-- 🔥 Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, 
+           createUserWithEmailAndPassword, 
+           signInWithEmailAndPassword,
+           signOut,
+           onAuthStateChanged } 
+  from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  // CONFIG PERSONNALISÉE — LA TIENNE ✔️
+  const firebaseConfig = {
+    apiKey: "AIzaSyAf0rz9mpUG2GpxyBeIyBvuHLHu-mANlSt",
+    authDomain: "movnembaii.firebaseapp.com",
+    projectId: "movnembaii",
+    storageBucket: "movnembaii.firebasestorage.app",
+    messagingSenderId: "753446508336",
+    appId: "1:753446508336:web:638f226312374d79e32fed",
+    measurementId: "G-CPYXKPRQGW"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const authBox = document.getElementById("authBox");
+  const userBox = document.getElementById("userBox");
+  const userEmail = document.getElementById("userEmail");
+
+  // Création de compte
+  document.getElementById("signupBtn").onclick = () => {
+    createUserWithEmailAndPassword(
+      auth,
+      signupEmail.value,
+      signupPass.value
+    ).then(() => alert("Compte créé 🎉"))
+     .catch(err => alert(err.message));
+  };
+
+  // Connexion
+  document.getElementById("loginBtn").onclick = () => {
+    signInWithEmailAndPassword(
+      auth,
+      loginEmail.value,
+      loginPass.value
+    ).catch(err => alert(err.message));
+  };
+
+  // Déconnexion
+  document.getElementById("logoutBtn").onclick = () => {
+    signOut(auth);
+  };
+
+  // Changement d'état
+  onAuthStateChanged(auth, user => {
+    if(user){
+      authBox.classList.add("hidden");
+      userBox.classList.remove("hidden");
+      userEmail.innerText = "Connecté : " + user.email;
+    } else {
+      userBox.classList.add("hidden");
+      authBox.classList.remove("hidden");
+    }
+  });
 </script>
 
 </body>
