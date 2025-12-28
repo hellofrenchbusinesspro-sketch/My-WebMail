@@ -1,26 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mon Webmail</title>
+  <title>Mon WebMail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#0f172a;
+      color:white;
+    }
+
+    header{
+      background:#020617;
+      padding:20px;
+      text-align:center;
+      font-size:28px;
+      font-weight: bold;
+      border-bottom:1px solid #1f2937;
+    }
+
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    .card{
+      background:#020617;
+      border-radius:16px;
+      padding:25px;
+      border:1px solid #1f2937;
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      background:#020617;
+      border-radius:10px;
+      border:1px solid #374151;
+      color:white;
+    }
+
+    button{
+      margin-top:15px;
+      width:100%;
+      padding:14px;
+      border-radius:10px;
+      border:none;
+      background:#2563eb;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1d4ed8;
+    }
+
+    footer{
+      margin-top:60px;
+      text-align:center;
+      color:#9ca3af;
+    }
+  </style>
 </head>
+
 <body>
-<h1>Bienvenue 😊</h1>
-<p>Mon site fonctionne !</p>
 
-<form action="https://formspree.io/f/mzdbgakk" method="POST">
-  <label>
-    Votre email :
-    <input type="email" name="email" required>
-  </label>
+<header>
+  Mon WebMail
+</header>
 
-  <label>
-    Votre message :
-    <textarea name="message" required></textarea>
-  </label>
+<div class="container">
+  <div class="card">
 
-  <button type="submit">Envoyer</button>
-</form>
+    <h2>Contacte-moi 📩</h2>
+    <p>Envoie-moi un message via ce formulaire :</p>
+
+    <form action="https://formspree.io/f/mldgdngr" method="POST">
+
+      <label>Ton email</label>
+      <input type="email" name="email" required>
+
+      <label>Ton message</label>
+      <textarea name="message" rows="6" required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+
+  </div>
+</div>
+
+<footer>
+  © 2025 — Mon WebMail
+</footer>
 
 </body>
 </html>
