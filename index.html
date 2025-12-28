@@ -51,18 +51,6 @@ header h1{
   box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
 
-.compose{
-  width:100%;
-  padding:12px;
-  background:#3f6bff;
-  border-radius:14px;
-  border:none;
-  color:white;
-  font-size:15px;
-  cursor:pointer;
-  margin-bottom:14px;
-}
-
 .mail{
   background:#1a2150;
   padding:12px;
@@ -70,6 +58,10 @@ header h1{
   margin-top:10px;
   cursor:pointer;
   transition:.2s;
+}
+
+.mail.unread{
+  border-left:4px solid #3f6bff;
 }
 
 .mail:hover{
@@ -85,25 +77,11 @@ header h1{
   box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
 
-input,textarea{
-  width:100%;
+.messageBox{
   background:#0c1028;
-  border:none;
-  padding:10px;
-  color:white;
-  border-radius:12px;
-  margin-top:6px;
-}
-
-button.send{
-  margin-top:12px;
-  width:100%;
-  padding:12px;
-  border:none;
+  padding:14px;
   border-radius:14px;
-  background:#3f6bff;
-  color:white;
-  font-size:16px;
+  min-height:140px;
 }
 
 /* ---------- FOOTER ---------- */
@@ -135,23 +113,25 @@ footer{
 <div class="container">
 
   <div class="sidebar">
-    <button class="compose">➕ Nouveau message</button>
+    <div class="mail unread" onclick="openMail('Bienvenue 🎉','Bienvenue sur ton WebMail !')">
+      Bienvenue 🎉
+    </div>
 
-    <div class="mail">Bienvenue 🎉</div>
-    <div class="mail">Notification système</div>
-    <div class="mail">Test message</div>
+    <div class="mail unread" onclick="openMail('Message système','Ceci est un message système')">
+      Message système
+    </div>
+
+    <div class="mail" onclick="openMail('Exemple','Ceci est un exemple de mail 👍')">
+      Exemple
+    </div>
   </div>
 
   <div class="main">
-    <h2>✉️ Nouveau message</h2>
+    <h2 id="title">📭 Aucun message ouvert</h2>
 
-    <label>Email</label>
-    <input placeholder="tonmail@email.com">
-
-    <label>Message</label>
-    <textarea rows="6"></textarea>
-
-    <button class="send">Envoyer</button>
+    <div class="messageBox" id="content">
+      Sélectionne un mail à gauche pour l’ouvrir ici.
+    </div>
   </div>
 
 </div>
@@ -159,6 +139,13 @@ footer{
 <footer>
   © 2025 — Mon WebMail
 </footer>
+
+<script>
+function openMail(title,text){
+  document.getElementById("title").innerText = title;
+  document.getElementById("content").innerText = text;
+}
+</script>
 
 </body>
 </html>
